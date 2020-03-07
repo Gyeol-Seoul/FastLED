@@ -124,50 +124,55 @@ _FL_DEFPIN(19, 2, A);
 
 #endif // SPARK
 
-#if defined(__STM32F1__) // Generic STM32F103 aka "Blue Pill"
+#if defined(__STM32F1__)
+ #define _RD32(T) struct __gen_struct_ ## T { static __attribute__((always_inline)) inline gpio_reg_map* r() { return T->regs; } };
+ #define _IO32(L) _RD32(GPIO ## L)
 
-#define MAX_PIN 46
+ _IO32(A); _IO32(B); _IO32(C); _IO32(D);
 
-_FL_DEFPIN(10, 0, A);	// PA0 - PA7
-_FL_DEFPIN(11, 1, A);
-_FL_DEFPIN(12, 2, A);
-_FL_DEFPIN(13, 3, A);
-_FL_DEFPIN(14, 4, A);
-_FL_DEFPIN(15, 5, A);
-_FL_DEFPIN(16, 6, A);
-_FL_DEFPIN(17, 7, A);
-_FL_DEFPIN(29, 8, A);	// PA8 - PA15
-_FL_DEFPIN(30, 9, A);
-_FL_DEFPIN(31, 10, A);
-_FL_DEFPIN(32, 11, A);
-_FL_DEFPIN(33, 12, A);
-_FL_DEFPIN(34, 13, A);
-_FL_DEFPIN(37, 14, A);
-_FL_DEFPIN(38, 15, A);
+ #define MAX_PIN PB1
 
-_FL_DEFPIN(18, 0, B);	// PB0 - PB11
-_FL_DEFPIN(19, 1, B);
-_FL_DEFPIN(20, 2, B);
-_FL_DEFPIN(39, 3, B);
-_FL_DEFPIN(40, 4, B);
-_FL_DEFPIN(41, 5, B);
-_FL_DEFPIN(42, 6, B);
-_FL_DEFPIN(43, 7, B);
-_FL_DEFPIN(45, 8, B);
-_FL_DEFPIN(46, 9, B);
-_FL_DEFPIN(21, 10, B);
-_FL_DEFPIN(22, 11, B);
+_FL_DEFPIN(PB11, 11, B);
+_FL_DEFPIN(PB10, 10, B);
+ _FL_DEFPIN(PB2, 2, B);
+ _FL_DEFPIN(PB0, 0, B);
+ _FL_DEFPIN(PA7, 7, A);
+ _FL_DEFPIN(PA6, 6, A);
+ _FL_DEFPIN(PA5, 5, A);
+ _FL_DEFPIN(PA4, 4, A);
+ _FL_DEFPIN(PA3, 3, A);
+ _FL_DEFPIN(PA2, 2, A);
+ _FL_DEFPIN(PA1, 1, A);
+ _FL_DEFPIN(PA0, 0, A);
+ _FL_DEFPIN(PC15, 15, C);
+ _FL_DEFPIN(PC14, 14, C);
+ _FL_DEFPIN(PC13, 13, C);
+ _FL_DEFPIN(PB7, 7, B);
+ _FL_DEFPIN(PB6, 6, B);
+ _FL_DEFPIN(PB5, 5, B);
+ _FL_DEFPIN(PB4, 4, B);
+ _FL_DEFPIN(PB3, 3, B);
+ _FL_DEFPIN(PA15, 15, A);
+ _FL_DEFPIN(PA14, 14, A);
+ _FL_DEFPIN(PA13, 13, A);
+ _FL_DEFPIN(PA12, 12, A);
+ _FL_DEFPIN(PA11, 11, A);
+ _FL_DEFPIN(PA10, 10, A);
+ _FL_DEFPIN(PA9, 9, A);
+ _FL_DEFPIN(PA8, 8, A);
+ _FL_DEFPIN(PB15, 15, B);
+ _FL_DEFPIN(PB14, 14, B);
+ _FL_DEFPIN(PB13, 13, B);
+ _FL_DEFPIN(PB12, 12, B);
+ _FL_DEFPIN(PB8, 8, B);
+ _FL_DEFPIN(PB1, 1, B);
 
-_FL_DEFPIN(2, 13, C);	// PC13 - PC15
-_FL_DEFPIN(3, 14, C);
-_FL_DEFPIN(4, 15, C);
+ #define SPI_DATA BOARD_SPI1_MOSI_PIN
+ #define SPI_CLOCK BOARD_SPI1_SCK_PIN
 
-#define SPI_DATA BOARD_SPI1_MOSI_PIN
-#define SPI_CLOCK BOARD_SPI1_SCK_PIN
+ #define HAS_HARDWARE_PIN_SUPPORT
 
-#define HAS_HARDWARE_PIN_SUPPORT
-
-#endif // __STM32F1__
+ #endif
 
 #endif // FASTLED_FORCE_SOFTWARE_PINS
 
